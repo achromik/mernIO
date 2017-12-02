@@ -9,7 +9,7 @@ import { Link } from 'react-router';
 import styles from '../../components/PostListItem/PostListItem.css';
 
 // Import Actions
-import { fetchPost, editPostRequest } from '../../PostActions';
+import { fetchPost, editPostRequest, votePostRequest } from '../../PostActions';
 
 // Import Selectors
 import { getPost } from '../../PostReducer';
@@ -39,6 +39,14 @@ export class PostDetailPage extends Component {
     this.props.toggleEditPost();
     this.props.editPostRequest(this.state);
   };
+
+  handleThumbUp = () => {
+    this.props.votePostRequest(this.props.post.voteCount + 1);
+  }
+  
+  handleThumbDown = () => {
+    this.props.votePostRequest(this.props.post.voteCount - 1);
+  }
 
   renderPostForm = () => {
     return (
@@ -84,6 +92,20 @@ export class PostDetailPage extends Component {
         <p className={styles['post-desc']}>
           {this.props.post.content}
         </p>
+        <div className={styles['post-vote']}>
+          <button 
+            className={styles['post-vote-button']}
+            onClick={this.handleThumbDown} >
+              -
+          </button>
+          Votes: {this.props.post.voteCount}
+          <button 
+            className={styles['post-vote-button']}
+            onClick={this.handleThumbUp} >
+              +
+          </button>
+        </div> 
+        
       </div>
     );
   };
@@ -133,6 +155,7 @@ function mapDispatchToProps(dispatch, props) {
   return {
     toggleEditPost: () => dispatch(toggleEditPost()),
     editPostRequest: (post) => dispatch(editPostRequest(props.params.cuid, post)),
+    votePostRequest: (post) => dispatch(votePostRequest(props.params.cuid, post)),
   };
 }
 
@@ -143,7 +166,8 @@ PostDetailPage.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
-  }).isRequired,
+    voteCount: PropTypes.number.isRequired,
+  }).isRequired, 
   intl: PropTypes.shape({
     messages: PropTypes.shape({
       authorName: PropTypes.string.isRequired,
@@ -154,6 +178,7 @@ PostDetailPage.propTypes = {
   showEditPost: PropTypes.bool.isRequired,
   toggleEditPost: PropTypes.func.isRequired,
   editPostRequest: PropTypes.func.isRequired,
+  votePostRequest:  PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(PostDetailPage));
