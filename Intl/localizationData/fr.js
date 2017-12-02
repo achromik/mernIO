@@ -28,7 +28,10 @@ export default {
   		  other {has # comments}
       } as of {date} (in real app this would be translated to French)`,
     editPost: 'Modifier Poster',
-    backToMain: 'Accueil',
+    backToMain: 'Postes',
     votes: 'Votes',
+    home: 'Accueil',
+    posts: 'Postes',
+    about: 'À propos',    
   },
 };
