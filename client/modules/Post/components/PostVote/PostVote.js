@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import styles from './PostVote.css';
 
@@ -8,13 +9,13 @@ const PostVote = (props, context) => {
     <button 
       className={styles['post-vote-button']}
       onClick={props.handleThumbDown()} >
-        -
+        <i className={"fa fa-minus-circle"} aria-hidden="true"></i>
     </button>
-    Votes: {props.voteCount}
+    <FormattedMessage id="votes" />: {props.voteCount}
     <button 
       className={styles['post-vote-button']}
       onClick={props.handleThumbUp()} >
-        +
+        <i className={"fa fa-plus-circle"} aria-hidden="true"></i>
     </button>
   </div>
   );

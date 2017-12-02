@@ -29,5 +29,6 @@ export default {
       } as of {date} (in real app this would be translated to French)`,
     editPost: 'Modifier Poster',
     backToMain: 'Accueil',
+    votes: 'Votes',
   },
 };
