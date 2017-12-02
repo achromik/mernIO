@@ -18,6 +18,8 @@ import { getShowEditPost } from '../../../App/AppReducer';
 
 import { toggleEditPost } from '../../../App/AppActions';
 
+import PostVote from "../../components/PostVote/PostVote";
+
 export class PostDetailPage extends Component {
   constructor(props) {
     super(props);
@@ -92,19 +94,11 @@ export class PostDetailPage extends Component {
         <p className={styles['post-desc']}>
           {this.props.post.content}
         </p>
-        <div className={styles['post-vote']}>
-          <button 
-            className={styles['post-vote-button']}
-            onClick={this.handleThumbDown} >
-              -
-          </button>
-          Votes: {this.props.post.voteCount}
-          <button 
-            className={styles['post-vote-button']}
-            onClick={this.handleThumbUp} >
-              +
-          </button>
-        </div> 
+        <PostVote 
+          handleThumbDown={() =>this.handleThumbDown}
+          handleThumbUp={() => this.handleThumbUp}
+          voteCount={this.props.post.voteCount}
+        />
         
       </div>
     );
