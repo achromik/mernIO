@@ -1,4 +1,4 @@
-import { ADD_POST, ADD_POSTS, DELETE_POST, EDIT_POST, VOTE } from './PostActions';
+import { ADD_POST, ADD_POSTS, DELETE_POST, EDIT_POST, VOTE_POST } from './PostActions';
 
 // Initial State
 const initialState = { data: [] };
@@ -29,7 +29,7 @@ const PostReducer = (state = initialState, action) => {
         })
       };
     
-    case VOTE :
+    case VOTE_POST :
       return {
         data: state.data.map( post => {
           return post.cuid === action.cuid
